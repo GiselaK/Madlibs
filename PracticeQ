@@ -1,0 +1,5 @@
+<body>
+<p> How many hours do you practice per day?</p>
+<input type="number" placeholder="Number">
+<input type="submit">
+</body>
