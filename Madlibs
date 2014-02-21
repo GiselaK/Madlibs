@@ -1,0 +1,18 @@
+
+<form>
+    <input type='word' placeholder="phrase">
+    <input type='word' placeholder="noun">
+    <input type='word' placeholder="noun">
+    <input type="submit">
+</form>
+    
+<li> <p>
+    <input type="word" placeholder="phrase">
+    Been a minute since we kicked it, you've been caught up </li> 
+    <li> With them
+    <input type="word" placeholder="noun">
+        , I don't get it, you're a star 
+     <input type="word" placeholder="noun"> </li>
+    <li> You shouldn't have to deal with that, I'd never make you feel like that</li>
+    </p>
+
