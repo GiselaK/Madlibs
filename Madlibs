@@ -1,4 +1,3 @@
-
 <html>
   <head>
     <title>OurGame</title>
@@ -16,11 +15,27 @@
     <li>hckjbjk</li>
     <li>cheetos</li>
 </ul>
+      
+          <p id="phrase-spot">  </p>
+      <p id="noun1-spot"></p>
+      <p id="noun2-spot"></p>
+
      </body>
     <script>
     saveWords = function() {
-    p=document.getElementsById("phrase");
-    console.log(p);
+    p=document.getElementById("phrase");
+    console.log(p.value);
+    n1=document.getElementById("noun1");
+    console.log(n1.value);
+    n2=document.getElementById("noun2");
+    console.log(n2.value);
+    phrase_spot = document.getElementById("phrase-spot")
+    noun1_spot=document.getElementById("noun1-spot")
+    noun2_spot=document.getElementById("noun2-spot")
+    phrase_spot.innerHTML=phrase.value;
+    noun1_spot.innerHTML=noun1.value;
+    noun2_spot.innerHTML=noun2.value;
+
     };
     onSubmit = function() {
         event.preventDefault();
@@ -28,4 +43,5 @@
     };
     </script>
     </html>
+
 
