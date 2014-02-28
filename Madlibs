@@ -3,22 +3,24 @@
     <title>OurGame</title>
   </head>
   <body>
-
+Our Game
   <form id="words" onsubmit="javascript:onSubmit()">
     <input type='text' placeholder="phrase" id="phrase">
     <input type='text' placeholder="noun" id="noun1">
     <input type='text' placeholder="noun" id="noun2">
+    <input type='text' placeholder="noun" id="noun3">
     <input type="submit">
   </form>
 
-<ul>   
-    <li>hckjbjk</li>
-    <li>cheetos</li>
-</ul>
+      I know that we have to take it to the <span id="noun1-spot"></span> 'cause everyone's depending on we
+See we ain't got nowhere to go but <span id="noun2-spot"></span>, it's our  <span id="noun2-spot"></span>
+
+We're choosing the way, we'll do what it takes to get to the <span id="noun2-spot"></span> of the highest mountain
+We'll do anything, we got to prove ourselves 'cause we know
+<span id="phrase-spot">  </span>
+          
       
-          <p id="phrase-spot">  </p>
-      <p id="noun1-spot"></p>
-      <p id="noun2-spot"></p>
+      
 
      </body>
     <script>
@@ -32,9 +34,11 @@
     phrase_spot = document.getElementById("phrase-spot")
     noun1_spot=document.getElementById("noun1-spot")
     noun2_spot=document.getElementById("noun2-spot")
+    noun3_spot=document.getElementById("noun3-spot")
     phrase_spot.innerHTML=phrase.value;
     noun1_spot.innerHTML=noun1.value;
     noun2_spot.innerHTML=noun2.value;
+    noun3_spot.innerHTML=noun3.value;
 
     };
     onSubmit = function() {
@@ -43,5 +47,4 @@
     };
     </script>
     </html>
-
 
