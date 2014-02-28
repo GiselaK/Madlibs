@@ -1,12 +1,31 @@
 
-    
-<li> <p>
-    <input type="word" placeholder="phrase">
-    Been a minute since we kicked it, you've been caught up </li> 
-    <li> With them
-    <input type="word" placeholder="noun">
-        , I don't get it, you're a star 
-     <input type="word" placeholder="noun"> </li>
-    <li> You shouldn't have to deal with that, I'd never make you feel like that</li>
-    </p>
+<html>
+  <head>
+    <title>OurGame</title>
+  </head>
+  <body>
+
+  <form id="words" onsubmit="javascript:onSubmit()">
+    <input type='text' placeholder="phrase" id="phrase">
+    <input type='text' placeholder="noun" id="noun1">
+    <input type='text' placeholder="noun" id="noun2">
+    <input type="submit">
+  </form>
+
+<ul>   
+    <li>hckjbjk</li>
+    <li>cheetos</li>
+</ul>
+     </body>
+    <script>
+    saveWords = function() {
+    p=document.getElementsById("phrase");
+    console.log(p);
+    };
+    onSubmit = function() {
+        event.preventDefault();
+        saveWords();
+    };
+    </script>
+    </html>
 
