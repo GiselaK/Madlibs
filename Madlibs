@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <title>OurGame</title>
@@ -12,19 +13,24 @@ Our Game
     <input type="submit">
   </form>
 
-      I know that we have to take it to the <span id="noun1-spot"></span> 'cause everyone's depending on we
-See we ain't got nowhere to go but <span id="noun2-spot"></span>, it's our  <span id="noun2-spot"></span>
+      <div style="display:none" id="theDiv"> I know that we have to take it to the <span id="noun1-spot"></span> 'cause everyone's depending on us <p>
+See we ain't got nowhere to go but <span id="noun2-spot"></span> , it's our  <span id="noun3-spot"></span></p>
 
-We're choosing the way, we'll do what it takes to get to the <span id="noun2-spot"></span> of the highest mountain
-We'll do anything, we got to prove ourselves 'cause we know
-<span id="phrase-spot">  </span>
+<p>We're choosing the way, we'll do what it takes to get to the <span id="noun2-spot"></span> of the highest mountain</p>
+<p>We'll do anything, we got to prove ourselves 'cause we know
+<span id="phrase-spot">  </span></p> </html></div>
           
       
       
 
      </body>
     <script>
+    
     saveWords = function() {
+    
+    theDiv=document.getElementById("theDiv");
+    theDiv.style.display="block";
+    
     p=document.getElementById("phrase");
     console.log(p.value);
     n1=document.getElementById("noun1");
@@ -47,4 +53,3 @@ We'll do anything, we got to prove ourselves 'cause we know
     };
     </script>
     </html>
-
