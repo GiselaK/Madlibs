@@ -4,13 +4,16 @@
     <title>OurGame</title>
   </head>
   <body>
-Our Game
+<center><b>Our Game </b></center>
   <form id="words" onsubmit="javascript:onSubmit()">
+ <center> 
+     <p></p>
     <input type='text' placeholder="phrase" id="phrase">
     <input type='text' placeholder="noun" id="noun1">
     <input type='text' placeholder="noun" id="noun2">
     <input type='text' placeholder="noun" id="noun3">
     <input type="submit">
+  </center> 
   </form>
 
       <div style="display:none" id="theDiv"> I know that we have to take it to the <span id="noun1-spot"></span> 'cause everyone's depending on us <p>
@@ -53,3 +56,4 @@ See we ain't got nowhere to go but <span id="noun2-spot"></span> , it's our  <sp
     };
     </script>
     </html>
+
