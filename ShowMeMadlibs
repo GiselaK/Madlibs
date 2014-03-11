@@ -1,0 +1,133 @@
+
+<html>
+  <head>
+    <title>OurGame</title>
+  </head>
+  <body>
+<center><b><h1>Our Game </h1></b></center>
+  <form id="words" onsubmit="javascript:onSubmit()">
+ <center> 
+     <p></p>
+    <input type='text' placeholder="phrase" id="phrase">
+    <input type='text' placeholder="noun" id="noun2">
+    <input type='text' placeholder="verbs" id="cheese">
+    <input type='text' placeholder='adjective' id='salt'>
+    <input type="submit">
+  </center> 
+  </form>
+
+<div style="display:none" id="theDiv">
+ <span id="phrase-spot"></span> 
+ <span id="noun2-spot"></span> <span id='to'></span> 
+<span id="cheese-spot"></span>
+    
+<div style="text-align:center; margin:80px;">
+    Mami you remind me of something<br>
+    Baby let me put your panties to the side<br>
+I'm a make you feel alright<br>
+'Cause I'm a give you what you need, yeah<br>
+Mami you remind me of something<br>
+I don't know what it is<br>
+You remind me of something<br>
+You gotta show me<br>
+Alright, you remind me of something<br>
+I don't know what it is right now<br>
+You remind me of something<br>
+Girl you gotta show me<br>
+
+[Verse 1: Kid Ink]<br>
+Uh, on the real no lie<br>
+I don't know what it is but you just my type<br>
+Everything just right<br>
+B set put us to the left<br>
+Don't listen to the hype though<br>
+Got a cup in your hand<br>
+Baby sitting but you ain't got no kids<br>
+We ain't leaving 'til there ain't no more left<br>
+Can't see no time on the Rolex<br>
+I could tell you a freak, go and show it<br>
+Looking for the after party, where to go at?<br>
+Go on the floor like a doormat<br>
+Baby you know where to throw that<br>
+I said<br>
+
+[Hook: Chris Brown]<br>
+Mami you remind me of something<br>
+I don't know what it is<br>
+You remind me of something<br>
+You gotta show me<br>
+Alright, you remind me of something<br>
+I don't know what it is right now<br>
+You remind me of something<br>
+Girl you gotta show me<br>
+
+[Bridge 2: Chris Brown & Kid Ink]<br>
+Baby if you know what it is
+On the real, can't lie, man just my type<br>
+Hands in the air looking for bitch right now<br>
+On the real, can't lie, man just my type<br>
+
+[Verse 2: Kid Ink]<br>
+Uh, so tell me what your name is<br>
+I don't really care who you came with<br>
+Unless you got a couple friends look like you<br>
+My bad if my ex try to fight you<br>
+Roll up soon as I roll in<br>
+Security better get with the program<br>
+Too deep, ain't know where to stand<br>
+So high, ain't know where to land<br>
+You remind me of something missing<br>
+Misses, you got my full attention<br>
+Listen, let go of the tension<br>
+If I get a minute, I put your bad ass in detention<br>
+
+[Bridge 1]
+
+[Bridge 2]
+
+[Break: Chris Brown]<br>
+Oh baby show me, show me something<br>
+Tomorrow I might be hungover, that don't mean nothing<br>
+See you all night long, I've been wrong<br>
+Baby show me something<br>
+You let me do it<br>
+    </div>
+
+
+     </body>
+    <script>
+    
+    saveWords = function() {
+    
+    theDiv=document.getElementById("theDiv");
+    theDiv.style.display="block";
+    
+    p=document.getElementById("phrase");
+    console.log(p.value);
+        
+    p2=document.getElementById("cheese");
+    console.log(p2.value);    
+        
+    n2=document.getElementById("noun2");
+    console.log(n2.value);  
+        
+    to=document.getElementById("salt");console.log(to.value);
+        
+    phrase_spot=document.getElementById("phrase-spot")
+    noun2_spot=document.getElementById("noun2-spot")
+    cheese_spot=document.getElementById("cheese-spot")
+    salt_spot=document.getElementById("to")
+    salt=document.getElementById("salt")
+    
+    phrase_spot.innerHTML=phrase.value;
+    noun2_spot.innerHTML=noun2.value;
+    cheese_spot.innerHTML=cheese.value;
+    salt_spot.innerHTML=salt.value
+    
+    };
+    onSubmit = function() {
+        event.preventDefault();
+        saveWords();
+    };
+    </script>
+    </html>
