@@ -1,0 +1,93 @@
+<html>
+<head>
+  <title>OurGame</title>
+</head>
+<body>
+  <center><b><h1>Oh Africa </h1></b></center>
+  
+  <form id="words" onsubmit="javascript:onSubmit()">
+   <center> 
+     
+     <input type='text' placeholder="phrase" id="phrase">
+     <input type='text' placeholder="noun" id="noun1">
+     <input type='text' placeholder="noun" id="noun2">
+     <input type='text' placeholder="noun" id="noun3">
+     <input type='text' placeholder="noun" id="noun4">
+     <input type='text' placeholder="noun" id="noun5">
+     <input type="submit">
+   </center> 
+ </form>
+
+ <div style="display:none" id="theDiv"> <b><center><p><h3> By: Akon</h3></p></b>I know that we have to take it to the <span id="noun1-spot"></span> 'cause everyone's depending on us <p>
+  See we ain't got nowhere to go but <span id="noun2-spot"></span> , it's our  <span id="noun3-spot"></span></p>
+
+  <p>We're choosing the way, we'll do what it takes to get to the <span id="noun4-spot"></span> of the highest mountain</p>
+  <p>We'll do anything, we got to prove ourselves 'cause we know
+    <span id="phrase-spot"> </span></p>
+    <p>Oh Africa...</p>
+    <p>Oh Africa...</p>
+    <p>Oh Africa...</p>
+    <p>I know that we have to take it to the goal 'cause</p> <p>everyone's depending on we</p>
+    <p>See we ain't got nowhere to go but up, it's our <span id="africa1-spot"></span></p>
+
+    <p>We're choosing the way, we'll do what it takes to get</p>
+    <p>to the top of the highest mountain</p>
+    <p>We'll do anything, we got to prove ourselves 'cause we know</p>
+
+    <p>Oh Africa...</p>
+    <p>Oh Africa...</p>
+    <p>Oh Africa...</p>
+
+    <p>See we'll never be able to forget this day 'cause</p> <p>it's the greatest day of our life</p>
+    <p>See no matter what happens at least we can say
+      <p>"we came, we saw, we tried"</p>
+
+      <p>We're choosing the way, we'll do what it takes to </p>
+      <p>get to the top of the highest mountain</p>
+      <p>We'll do anything, we got to prove ourselves </p> <p>'cause we know</p>
+
+
+
+      <p>This is our time to <span id="noun5-spot"></span>, our time to fly, our time <p>to be inside the sky
+        <p>Our time to soar, our time to score, the last one in <span id="worldwide-spot"></span></p>
+
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+
+          <p>Oh Africa...</p>
+
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+          <p>Worldwide</p>
+
+          <p>Oh Africa...</p>
+          <p>Oh Africa...</p>
+          <p>Oh Africa...</p>
+          <p>Oh Africa...</p>
+          <p>Oh Africa...</p>
+          <p>Oh Africa...</p>
+        </center></html></div> </body>
+        <script>
+        
+        saveWords = function() 
+        {
+          theDiv=document.getElementById("theDiv");
+          theDiv.style.display="block";
+          entries = ["phrase", "noun1", "noun2","noun3", "noun4", "noun5"];
+          for (var i=0; i<6;i++)
+          {
+              word=entries[i]
+              input=document.getElementById(word);
+              spot=document.getElementById(word+"-spot");
+              spot.innerHTML=input.value;
+          }
+        };
+        onSubmit = function() {
+          event.preventDefault();
+          saveWords();
+        };
+        </script>
+        </html>
