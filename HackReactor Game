@@ -1,0 +1,293 @@
+<html>
+<head>
+</head>
+<body id="body"> </body>
+<!-- <link rel="stylesheet" type="text/css" media="screen" href="HRGame.css"> -->
+<canvas id="canvas" height="1050" width="1050"> </canvas>
+<style type="text/css" media="screen">
+        canvas, img {display: block; margin: 1em auto; border: 1px solid black;}
+        #canvas {
+            background-image: url(pink.png);
+            background-color: rgb(117, 67, 54);
+          /*background-image: url(wood1.jpg);*/
+        }
+
+        #body {
+            background-image: url(wood1.jpg);
+        }
+
+</style>
+<script>
+
+var width = 1050;//width of bg
+var height = 1050;//height of bg
+var canvas = ctx = false;
+var frameRate = 1/40; // 
+var frameDelay = frameRate * 400; // ms
+var loopTimer = false;
+var player1=true;
+var shotInRange=false;
+function createBall(x, y){
+     var ball = {
+        mass: 0.1, //kg
+        radius: 30, // 1px = 1cm  // Size of ball
+        restitution: -0.7, // Effects speed 
+        line: {},
+        velocity: {x: 0, y: 0},
+        Cd: 0.4,
+        rho: 1,
+        A: Math.PI * 30 /* ball radius*/* 30 /* ball radius*// (10000),
+        fx:{},
+        fy:{},
+        ax:{},
+        shootable: true
+    };
+    ball.position = {x: x, y: y}; // starting position // start speed
+    return ball;    
+}
+
+ var ball1 = createBall(200, 220);
+ var ball2 = createBall(800, 800);
+ var mouse = {x: 0, y: 0, isDown: false};
+
+function getMousePosition(e) {
+    mouse.x = e.pageX - canvas.offsetLeft;
+    mouse.y = e.pageY - canvas.offsetTop;
+    //console.log(mouse)
+}
+var mouseDown = function(e,ball) {
+    if (e.which == 1)
+    {
+        getMousePosition(e);
+        mouse.isDown = true;
+    }
+}
+var launchBall = function(ball){
+    ball.velocity.y = (ball.position.y - mouse.y) /10;
+    ball.velocity.x = (ball.position.x - mouse.x) / 10;
+}
+var mousexInRange = function (ball)
+{
+    if (mouse.x-ball.position.x<180 && mouse.x-ball.position.x>-180)
+    {
+        return true;
+    }
+    return false;
+}
+var mouseyInRange = function (ball)
+{
+    if (mouse.y-ball.position.y<180 && mouse.y-ball.position.y>-180)
+    {
+        return true;
+    }
+    return false;
+}
+var mouseInRange = function (ball)
+{
+    if (mouseyInRange(ball) && mousexInRange(ball))
+    {
+        return true;
+    }
+    return false;
+}
+var mouseUp = function(e,ball) { 
+    if (e.which == 1) 
+    {
+        mouse.isDown = false;
+        if (player1 && ball1.shootable && shotInRange)
+        {
+            launchBall(ball1);
+            ball1.shootable=false;
+        }
+        else if (!player1 && ball2.shootable && shotInRange)
+        {
+            launchBall(ball2);
+            ball2.shootable=false;
+        } 
+    }
+}
+
+var setup = function() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    canvas.onmousemove = getMousePosition;
+    canvas.onmousedown = mouseDown;
+    canvas.onmouseup = mouseUp;
+    loopTimer = setInterval(loop, frameDelay);
+}
+var setBallSpeed=function(ball){
+    ball.fx = -0.5 * ball.Cd * ball.A * ball.rho * ball.velocity.x * ball.velocity.x * ball.velocity.x / Math.abs(ball.velocity.x);
+    ball.fy = -0.5 * ball.Cd * ball.A * ball.rho * ball.velocity.y * ball.velocity.y * ball.velocity.y / Math.abs(ball.velocity.y);
+}
+var ballShouldStop=function(ball){
+    if ((ball.velocity.x<0.5 && ball.velocity.x>0) && (ball.velocity.y<0.5 && ball.velocity.y>0)||(ball.velocity.y>-0.5 && ball.velocity.y<0))
+    {
+        return true;
+    }
+    else if ((ball.velocity.x>-0.5 && ball.velocity.x<0) && (ball.velocity.y<0.5 && ball.velocity.y>0)||(ball.velocity.y>-0.5 && ball.velocity.y<0)) 
+    {
+        return true;
+    }
+    return false;
+}
+var stopBall= function(ball){
+    ball.velocity.x=0;
+    ball.velocity.y=0;
+    ball.shootable=true;
+}
+var setBallLoopInfo=function(ball){
+    ball.fx = (isNaN(ball.fx) ? 0 : ball.fx);
+    ball.fy = (isNaN(ball.fy) ? 0 : ball.fy);
+    ball.ax = ball.fx / ball.mass;
+    ball.ay = ball.fy / ball.mass;
+    ball.velocity.x += ball.ax*frameRate;
+    ball.velocity.y += ball.ay*frameRate;
+    ball.position.x += ball.velocity.x*frameRate*100;
+    ball.position.y += ball.velocity.y*frameRate*100;
+}
+var wallCollision=function(ball){
+    if (ball.position.x<=30||ball.position.x>=1020)
+    {
+        ball.velocity.x = ball.velocity.x * (-1);
+    }
+    if (ball.position.y<=30||ball.position.y>=1020)
+    {
+        ball.velocity.y = ball.velocity.y * (-1);
+    }
+}
+var hole= function (ball){
+    if (ball.position.x>325+ball.radius && ball.position.x<725-ball.radius && ball.position.y>325+ball.radius && ball.position.y<725-ball.radius)
+    {
+        return true;
+    }
+    return false;
+}
+var outsideDonut= function (ball){
+    if (!ball.position.x>0+ball.radius && !ball.position.x<1050-ball.radius && !ball.position.y>0+ball.radius && !ball.position.y<1050-ball.radius)
+    {
+        return true;
+    }
+    return false;
+}
+var loop = function(){
+    if ( ! mouse.isDown && shotInRange) 
+    {
+        if (player1)
+        {   
+            setBallSpeed(ball1);
+            wallCollision(ball1);
+            if (hole(ball1))
+            {
+               // console.log ("sucess");
+            }
+            if (outsideDonut(ball1))
+            {
+                console.log ("sucess");
+            }
+
+            if (ballShouldStop(ball1))
+            {
+                stopBall(ball1);
+                shotInRange=false;
+                player1=false;
+            }  
+            setBallLoopInfo(ball1);
+        }
+        else if (!player1 && shotInRange)
+        {
+            setBallSpeed(ball2);
+            wallCollision(ball2);
+            if (hole(ball2))
+            {
+                //console.log ("sucess2");
+            }
+            if (outsideDonut(ball2))
+            {
+                console.log ("sucess");
+            }
+            if (ballShouldStop(ball2))
+            {
+                stopBall(ball2);
+                shotInRange=false;
+                player1=true;
+            }
+            setBallLoopInfo(ball2);
+        }
+            //ball collision
+           // if(ball1.position.x-ball2.position.x< 20 && ball1.position.x-ball2.position.x >0 || ball1.position.x - ball2.position.x > -20 && ball1.position.x - ball2.position.x < 0 )
+           // {
+           //      ball1.velocity.y = ball1.velocity.y * (-1);
+           //      ball2.velocity.y = ball2.velocity.y * (-1);
+           //      console.log("ball1:",ball1.position,"ball2:",ball2.position)
+           // }
+           // if (ball1.position.y - ball2.position.y > -20 && ball1.position.y - ball2.position.y < 0 || ball1.position.y-ball2.position.y<20 && ball1.position.y-ball2.position.y >0)
+           // {
+           //      ball1.velocity.y = ball1.velocity.y * (-1);
+           //      ball2.velocity.y = ball2.velocity.y * (-1);
+           //      console.log("ball1:",ball1.position,"ball2:",ball2.position)
+           // }
+}
+var drawBall=function(ball){
+    ctx.beginPath();
+    ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, Math.PI*2, true);
+    ctx.closePath();
+    ctx.fill();
+}  
+ctx.clearRect(0,0,width,height);
+ctx.save();
+//ctx.translate(ball1.position.x, ball1.position.y);
+ctx.fillStyle = 'red';
+drawBall(ball1);
+ctx.fillStyle ='blue';
+drawBall(ball2); 
+ctx.restore();
+var lineToMouse= function (ball){
+    ctx.beginPath();
+    ctx.moveTo(ball.position.x, ball.position.y);
+    if (ball.shootable){//once ball shot no longer shootable
+        if (mousexInRange(ball) && mouseyInRange(ball))
+        {
+            ctx.lineTo(mouse.x, mouse.y);
+            ball.line.x=mouse.x;
+            ball.line.y=mouse.y;
+            shotInRange=true;
+
+        }
+        else if (mousexInRange(ball) && !mouseyInRange(ball))
+        {
+            ctx.lineTo(mouse.x, ball.line.y);
+            ball.line.x=mouse.x;
+        }
+        else if (!mousexInRange(ball) && mouseyInRange(ball))
+        {
+            ctx.lineTo(ball.line.x, mouse.y);
+            ball.line.y=mouse.y;
+        }
+        else 
+        {   
+            ctx.lineTo(ball.line.x, ball.line.y);
+        }
+    ctx.lineWidth = 10;
+    ctx.stroke();
+    ctx.closePath();
+    }
+}
+if (mouse.isDown)
+{
+    if (player1)
+    {
+        ctx.strokeStyle = 'red';
+        lineToMouse(ball1);
+    }
+    else
+    {
+        ctx.strokeStyle = 'blue';
+        lineToMouse(ball2);
+    }
+}
+
+}
+
+setup();
+</script>
+</html>
